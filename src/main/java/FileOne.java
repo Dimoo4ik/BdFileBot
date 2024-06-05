@@ -24,7 +24,7 @@ public class FileOne {
             fileInputStream.read(fileData);
             fileInputStream.close();
 
-            statement.setLong(1, file.length()); // 使用文件大小作为 id
+            statement.setLong(1, file.length());
             statement.setBytes(2, fileData);
             statement.executeUpdate();
 
