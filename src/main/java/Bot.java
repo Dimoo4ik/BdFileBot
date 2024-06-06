@@ -13,7 +13,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.io.ByteArrayInputStream;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,12 +45,11 @@ public class Bot extends TelegramLongPollingBot {
 
             if (userMessage.equals("/getfile")) {
                 FileOne fileOne = new FileOne();
-
-                byte[] fileBytes = fileOne.downloadingFileFromMysql();
+                fileOne.downloadingFileFromMysql();
 
                 SendDocument sendDocument = new SendDocument();
                 sendDocument.setChatId(chatId);
-                sendDocument.setDocument(new InputFile(new ByteArrayInputStream(fileBytes), "downloaded_file.txt"));
+                sendDocument.setDocument(new InputFile(new File("data/gg.pdf")));
 
                 try {
                     execute(sendDocument);
